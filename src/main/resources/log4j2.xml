@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="off" monitorInterval="1800">
+	<appenders>
+		<!-- 定义控制台输出 -->
+		<Console name="development" target="SYSTEM_OUT" follow="true">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%c] - %msg%n" />
+		</Console>
+		<!-- 产品分析日志 -->
+		<RollingRandomAccessFile name="production"
+			fileName="${log4j.log.file}" filePattern="${log4j.log.file}.%d{yyyy-MM-dd}">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%c] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+		<!-- 产品错误日志 -->
+		<RollingRandomAccessFile name="productionError"
+			fileName="${log4j.log.errorFile}" filePattern="${log4j.log.file}.%d{yyyy-MM-dd}">
+			<PatternLayout
+				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%c] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+	</appenders>
+	<loggers>
+		<!-- 第三方日志记录 -->
+		<logger name="org.springframework" level="info">
+		</logger>
+		<!-- <logger name="org.springframework.core" level="info">
+		</logger>
+		<logger name="org.springframework.beans" level="info">
+		</logger>
+		<logger name="org.springframework.context" level="info">
+		</logger>
+		<logger name="org.springframework.web" level="info">
+		</logger> -->
+		<!-- Root Logger -->
+		@log4j.logger@
+	</loggers>
+</configuration>
