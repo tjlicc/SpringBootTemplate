@@ -5,21 +5,36 @@
         <h1 th:inline="text">Hello Thymeleaf</h1>  
         <p th:text="${hello}">aaa</p>
         <p th:text="${#locale.country}">aaa</p>
-        <table>
+		<p>User list from MySQL</p>
+        <table style="border: 1px solid #000;">
         	<thead>
 	      		<tr>
-			        <th>省份</th>
-			        <th>地市</th>
-			        <th>区县</th>
+			        <th>姓名</th>
+			        <th>邮箱</th>
 	      		</tr>
 	      	</thead>
 	      	<tbody>
-				<tr th:each="example : ${examples}">
-			        <td th:text="${example.province}">Onions</td>
-			        <td th:text="${example.city}">2.41</td>
-			        <td th:text="${example.district}">yes</td>
+				<tr th:each="user : ${userList}">
+			        <td th:text="${user.name}">Onions</td>
+			        <td th:text="${user.email}">2.41</td>
 	      		</tr>	      	
 	      	</tbody>
     	</table>
+	
+		<p>File list from MongoDB</p>
+		<table style="border: 1px solid #000;">
+			<thead>
+			<tr>
+				<th>文件名</th>
+				<th>存储路径</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="file : ${fileList}">
+				<td th:text="${file.fileName}">Onions</td>
+				<td th:text="${file.filePath}">2.41</td>
+			</tr>
+			</tbody>
+		</table>
     </body>  
 </html>
